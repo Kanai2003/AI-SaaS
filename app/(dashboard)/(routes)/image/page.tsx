@@ -82,7 +82,7 @@ const ImagePage = () => {
                                             <Input
                                                 className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                                 disabled={isLoading}
-                                                placeholder="Ex: A Pictue of a person running on a beach"
+                                                placeholder="Ex: A pictue of a person running on a beach"
                                                 {...field}
                                             />
                                         </FormControl>
