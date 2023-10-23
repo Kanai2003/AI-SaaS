@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { VideoIcon } from "lucide-react";
+import { Video, VideoIcon } from "lucide-react";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -53,7 +53,7 @@ const VideoPage = () => {
       <Heading
         title="Video Generation"
         description="Turn your prompt into video."
-        icon={VideoIcon}
+        icon={Video}
         iconColor="text-[#FFD700]"
         bgColor="bg-orange-500/10"
       />
