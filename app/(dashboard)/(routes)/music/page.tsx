@@ -47,66 +47,6 @@ const MusicPage = () => {
         }
     }
 
-    // return (
-    //     <div>
-    //         <Heading
-    //             title="Music Generation"
-    //             description="Turn your promt to music."
-    //             icon={MusicIcon}
-    //             iconColor="text-orange-500"
-    //             bgColor="bg-orange-500/10"
-
-    //         />
-    //         <div className="px-4 lg:px-8">
-    //             <div>
-    //                 <Form {...form}>
-    //                     <form
-    //                         onSubmit={form.handleSubmit(onSubmit)}
-    //                         className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
-    //                     >
-    //                         <FormField
-    //                             name="prompt"
-    //                             render={({ field }) => (
-    //                                 <FormItem className="col-span-12 lg:col-span-10">
-    //                                     <FormControl className="m-0 p-0">
-    //                                         <Input
-    //                                             className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-    //                                             disabled={isLoading}
-    //                                             placeholder="Ex: Piano music with a happy vibe"
-    //                                             {...field}
-    //                                         />
-    //                                     </FormControl>
-    //                                 </FormItem>
-    //                             )}
-    //                         />
-    //                         <Button className="col-span-12 lg:col-span-2 w-full">
-    //                             Generate
-    //                         </Button>
-    //                     </form>
-    //                 </Form>
-    //             </div>
-    //             <div className="space-y-4 mt-4">
-    //                 {isLoading && (
-    //                     <div className="p-8 rounded-lg w-full flex justify-center items-center bg-muted">
-    //                         <Loader />
-    //                     </div>
-    //                 )}
-    //                 {!music && !isLoading && (
-    //                     <div>
-    //                         <Empty label="No music generated" />
-    //                     </div>
-    //                 )}
-    //                 {music && (
-    //                     <audio controls className="w-full">
-    //                         <source src={music}/>
-    //                     </audio>
-    //                 )}
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
-
-
     return ( 
         <div>
           <Heading
