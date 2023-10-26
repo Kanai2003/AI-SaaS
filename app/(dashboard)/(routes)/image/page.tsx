@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 
 import { Heading } from "@/components/heading";
-import { amountOptions, formSchema , resolutionsOptions} from "./constants";
+import { amountOptions, formSchema, resolutionsOptions } from "./constants";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -20,10 +20,13 @@ import { cn } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProModel } from "@/hooks/use-pro-model";
 
 
 
 const ImagePage = () => {
+
+    const proModal = useProModel();
     const router = useRouter();
 
     const [images, setImages] = useState<string[]>([]);
@@ -50,8 +53,9 @@ const ImagePage = () => {
 
             form.reset();
         } catch (error: any) {
-            //TODO: OPEN PRO MODAL
-            console.error(error);
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }
@@ -102,11 +106,11 @@ const ImagePage = () => {
                                         >
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue defaultValue={field.value}/>
+                                                    <SelectValue defaultValue={field.value} />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                {amountOptions.map((option)=> (
+                                                {amountOptions.map((option) => (
                                                     <SelectItem
                                                         key={option.value}
                                                         value={option.value}
@@ -132,11 +136,11 @@ const ImagePage = () => {
                                         >
                                             <FormControl>
                                                 <SelectTrigger>
-                                                    <SelectValue defaultValue={field.value}/>
+                                                    <SelectValue defaultValue={field.value} />
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                {resolutionsOptions.map((option)=> (
+                                                {resolutionsOptions.map((option) => (
                                                     <SelectItem
                                                         key={option.value}
                                                         value={option.value}
@@ -166,8 +170,8 @@ const ImagePage = () => {
                             <Empty label="No Images Generated!" />
                         </div>
                     )}
-                    <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4mt-8">
-                        {images.map((src)=>(
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4mt-8">
+                        {images.map((src) => (
                             <Card
                                 key={src}
                                 className="rounded-lg overflow-hidden"
@@ -180,12 +184,12 @@ const ImagePage = () => {
                                     />
                                 </div>
                                 <CardFooter className="p-2">
-                                    <Button 
-                                    onClick={() => window.open(src)}
-                                    variant="secondary" 
-                                    className="w-full"
+                                    <Button
+                                        onClick={() => window.open(src)}
+                                        variant="secondary"
+                                        className="w-full"
                                     >
-                                        <Download className="h-4 w-4 mr-2"/>
+                                        <Download className="h-4 w-4 mr-2" />
                                     </Button>
                                 </CardFooter>
                             </Card>

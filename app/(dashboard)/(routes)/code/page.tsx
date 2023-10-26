@@ -21,9 +21,12 @@ import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avarar";
+import { useProModel } from "@/hooks/use-pro-model";
 
 
 const CodePage = () => {
+
+    const proModal = useProModel();
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
@@ -46,8 +49,10 @@ const CodePage = () => {
 
             form.reset();
         } catch (error: any) {
-            //TODO: OPEN PRO MODAL
-            console.error(error);
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            }
+            console.log(error)
         } finally {
             router.refresh();
         }
@@ -114,13 +119,13 @@ const CodePage = () => {
                                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                                 <ReactMarkdown
                                     components={{
-                                        pre: ({node, ...props}) => (
+                                        pre: ({ node, ...props }) => (
                                             <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
-                                                <pre {...props}/>
+                                                <pre {...props} />
                                             </div>
                                         ),
-                                        code: ({node, ...props}) => (
-                                            <code className="bg-black/10 rounded-lg p-1" {...props}/>
+                                        code: ({ node, ...props }) => (
+                                            <code className="bg-black/10 rounded-lg p-1" {...props} />
                                         )
                                     }}
                                     className="text-sm overflow-hidden leading-7"

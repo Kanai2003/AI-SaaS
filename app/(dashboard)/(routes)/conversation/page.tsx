@@ -21,9 +21,12 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avarar";
 import ReactMarkdown from "react-markdown";
+import { useProModel } from "@/hooks/use-pro-model";
 
 
 const ConversationPage = () => {
+
+    const proModal = useProModel();
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
@@ -46,8 +49,10 @@ const ConversationPage = () => {
 
             form.reset();
         } catch (error: any) {
-            //TODO: OPEN PRO MODAL
-            console.error(error);
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
+            console.log(error)
         } finally {
             router.refresh();
         }
